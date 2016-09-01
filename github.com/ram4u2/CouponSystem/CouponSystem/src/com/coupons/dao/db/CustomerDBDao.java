@@ -22,7 +22,7 @@ public class CustomerDBDao implements CustomerDao
 	
 	@Override
 	public void createCustomer(Customer c) throws DaoException {
-		// get connection from pool
+		// get connection from pool...
 		Connection con = null;
 		try {
 			con = getConnection();
