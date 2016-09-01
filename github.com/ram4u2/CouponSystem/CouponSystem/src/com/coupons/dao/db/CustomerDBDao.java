@@ -54,7 +54,7 @@ public class CustomerDBDao implements CustomerDao
 				Connection con = null;
 				try {
 					con = getConnection();
-				
+				  
 					String sql = 
 							"DELETE FROM Customer WHERE ID = (?)";
 					PreparedStatement stat = con.prepareStatement(sql);
