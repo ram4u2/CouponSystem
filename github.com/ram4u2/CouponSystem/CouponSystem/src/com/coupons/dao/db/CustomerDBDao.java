@@ -14,6 +14,7 @@ import com.coupons.beans.Customer;
 import com.coupons.beans.Coupon;
 import com.coupons.dao.CustomerDao;
 import com.coupons.exceptions.DaoException;
+import com.coupons.pool.Pool;
 
 public class CustomerDBDao implements CustomerDao
 {
@@ -23,9 +24,8 @@ public class CustomerDBDao implements CustomerDao
 	@Override
 	public void createCustomer(Customer c) throws DaoException {
 		// get connection from pool...
-		Connection con = null;
+		Connection con = Pool.getConnection();
 		try {
-			con = getConnection();
 		
 			String sql = 
 					"INSERT INTO Customer VALUES (?,?,?)";
@@ -50,10 +50,10 @@ public class CustomerDBDao implements CustomerDao
 
 	@Override
 	public void removeCustomer(Customer c) throws DaoException {
-		// get connection from pool
-				Connection con = null;
+				// get connection from pool
+				Connection con = Pool.getConnection();
+				
 				try {
-					con = getConnection();
 				  
 					String sql = 
 							"DELETE FROM Customer WHERE ID = (?)";
@@ -78,9 +78,9 @@ public class CustomerDBDao implements CustomerDao
 	@Override
 	public void updateCustomer(Customer c) throws DaoException {
 		// get connection from pool
-		Connection con = null;
+		Connection con = Pool.getConnection();
+		
 		try {
-			con = getConnection();
 		
 			String sql = 
 					"UPDATE Customer SET CUST_NAME=(?) WHERE ID = (?)";
@@ -106,8 +106,10 @@ public class CustomerDBDao implements CustomerDao
 	@SuppressWarnings("null")
 	@Override
 	public Customer getCustomer(long id) throws DaoException {
+				
 				// get connection from pool
-				Connection con = null;
+				Connection con = Pool.getConnection();
+			
 				Customer custumer = new Customer();
 				
 				try {
@@ -143,16 +145,14 @@ public class CustomerDBDao implements CustomerDao
 	@SuppressWarnings("null")
 	@Override
 	public List<Company> getAllCustomer() throws DaoException {
+		
 		// get connection from pool
-		Connection con = null;
+		Connection con = Pool.getConnection();
 		Company company = new Company();
 		List<Company> companies = null;
 		
 		try {
-			con = getConnection();
 			ResultSet rs = null;
-			
-		
 			String sql = 
 					"SELECT * FROM company";
 			PreparedStatement stat = con.prepareStatement(sql);
@@ -179,8 +179,8 @@ public class CustomerDBDao implements CustomerDao
 
 	}
 	
-	
-	public List<Coupons> getCoupons()throws DaoException {
+	// A function that return all coupons
+	public List<Coupon> getAllCoupons()throws DaoException {
 		
 		// get connection from pool
 				Connection con = null;
@@ -224,7 +224,6 @@ public class CustomerDBDao implements CustomerDao
 	}
 	
 	// A function that creates connection
-	// TODO: Use the pool instead later on
 	private Connection getConnection() throws SQLException
 	{
 		String url = "jdbc:mysql://localhost:3306/copunsystem";
@@ -236,6 +235,25 @@ public class CustomerDBDao implements CustomerDao
 				
 	}
 	
+	// A function that return if login Success (booolean)
+	public boolean login (String custName, String password){
+	
+		boolean check=false;
+		Connection con = Pool.getConnection();//setting up connections from class pool
+		String sql = "SELECT custName,password FROM company WHERE cust_name=? AND password=?";
+		try {
+		PreparedStatement stat=con.prepareStatement(sql);
+		stat.setString(2, custName);
+		stat.setString(3,password);
+		ResultSet rs=stat.executeQuery();
+		
+			check=rs.next();
+		} catch (SQLException e) {
+			 DaoException.showErrorMessage(e);
+		}
+		
+		return check;
+	}
 	
 	
 	
