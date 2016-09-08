@@ -2,7 +2,6 @@ package com.coupons.dao;
 
 import java.util.List;
 
-import com.coupons.beans.Company;
 import com.coupons.beans.Coupon;
 import com.coupons.exceptions.DaoException;
 

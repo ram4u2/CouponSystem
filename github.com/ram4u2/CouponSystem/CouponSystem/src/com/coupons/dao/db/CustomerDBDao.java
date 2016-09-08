@@ -180,15 +180,18 @@ public class CustomerDBDao implements CustomerDao
 	}
 	
 	// A function that return all coupons
+	@SuppressWarnings("null")
 	public List<Coupon> getAllCoupons()throws DaoException {
-		
-		// get connection from pool
-				Connection con = null;
+				
+				// get connection from pool
+				Connection con = Pool.getConnection();
+				
 				Coupon coupon = new Coupon();
 				List<Coupon> coupons = new ArrayList<>();
 				
 				try {
-					con = getConnection();
+
+					
 					ResultSet rs = null;
 					
 				
@@ -235,7 +238,7 @@ public class CustomerDBDao implements CustomerDao
 				
 	}
 	
-	// A function that return if login Success (booolean)
+	// A function that return if login Success (boolean)
 	public boolean login (String custName, String password){
 	
 		boolean check=false;

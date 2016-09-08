@@ -1,8 +1,16 @@
 package com.coupons.exceptions;
 
-// Maybe better to extend Runtime exception
-public class DaoException extends Exception 
+import java.sql.SQLException;
+
+
+public class DaoException extends SQLException
 {
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public DaoException() {
 		super();
@@ -19,4 +27,12 @@ public class DaoException extends Exception
 		// TODO Auto-generated constructor stub
 	}
 
-}
+	public static void showErrorMessage(SQLException e){
+		System.err.println("Error :" + e.getMessage());
+		System.err.println("Error Code :" + e.getErrorCode());
+	}
+
+	
+	}
+
+

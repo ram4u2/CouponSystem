@@ -1,14 +1,11 @@
 package com.coupons.beans;
 
-import java.util.Collection;
-
 
 public class Customer 
 {
 	private long id;
 	private String name;
  	private String password;
- 	private Collection <Coupon> coupons;
  		
 
 	//
