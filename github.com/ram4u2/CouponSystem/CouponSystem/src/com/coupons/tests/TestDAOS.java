@@ -9,14 +9,14 @@ public class TestDAOS {
 	public static void main(String[] args) throws DaoException
 	{
 		CustomerDao custDao = new CustomerDBDao();
-		Customer c1 = new Customer("Moshe", 6, "whatever");
+		//Customer c1 = new Customer("Moshe", "6");
 		
 		// create
-		custDao.createCustomer(c1);
+		//custDao.createCustomer(c1);
 		
 		
 		// get
-		Customer c2 = custDao.getCustomer(6);
+		Customer c2 = custDao.getCustomer(1);
 		System.out.println(c2);
 	}
 }

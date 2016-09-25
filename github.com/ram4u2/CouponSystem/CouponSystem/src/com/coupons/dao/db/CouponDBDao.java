@@ -86,7 +86,7 @@ public class CouponDBDao implements CouponDAO{
 		}
 	
 	
-	public Coupon getCoupon(long id)throws DaoException{
+	 /*public Coupon getCoupon(long id)throws DaoException{
 		Coupon coupon =null;
 		String title = null;
 		Date start_date = null;
@@ -125,7 +125,7 @@ public class CouponDBDao implements CouponDAO{
 		return coupon;
 		
 	}
-
+*/
 
 	// A function that return all coupons
 		@SuppressWarnings("null")
@@ -251,6 +251,11 @@ public class CouponDBDao implements CouponDAO{
 	}
 	@Override
 	public List<Coupon> getCouponByType(String CouponType) throws DaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Coupon> getAllCoupon() throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}

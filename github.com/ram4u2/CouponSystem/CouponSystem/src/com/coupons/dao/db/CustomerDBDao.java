@@ -107,18 +107,18 @@ public class CustomerDBDao implements CustomerDao
 	@Override
 	public Customer getCustomer(long id) throws DaoException {
 				
-				// get connection from pool
-				Connection con = Pool.getConnection();
+		// get connection from pool...
+		Connection con = Pool.getConnection();
 			
 				Customer custumer = new Customer();
 				
 				try {
-					con = getConnection();
+					
 					ResultSet rs = null;
 					
 				
 					String sql = 
-							"SELECT * FROM Customer WERE ID = (?)";
+							"SELECT * FROM customer WHERE ID= (?)";
 					PreparedStatement stat = con.prepareStatement(sql);
 					stat.setLong(1, id);
 					
@@ -227,16 +227,16 @@ public class CustomerDBDao implements CustomerDao
 	}
 	
 	// A function that creates connection
-	private Connection getConnection() throws SQLException
-	{
-		String url = "jdbc:mysql://localhost:3306/copunsystem";
-				
-		Connection con = 
-				DriverManager.getConnection(url, 
-						"user", "password");
-		return con;
-				
-	}
+//	private Connection getConnection() throws SQLException
+//	{
+//		String url = "jdbc:mysql://localhost:3306/copunsystem";
+//				
+//		Connection con = 
+//				DriverManager.getConnection(url, 
+//						"user", "password");
+//		return con;
+//				
+//	}
 	
 	// A function that return if login Success (boolean)
 	public boolean login (String custName, String password){
